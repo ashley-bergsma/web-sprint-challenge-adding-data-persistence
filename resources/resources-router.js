@@ -31,7 +31,8 @@ router.get('/:id', (req, res) => {
         });
 }); 
 
-//* POST a new project *// [🎠 working!]
+
+//* POST a new resource *// [🎠 working!]
 router.post('/', (req, res) => {
     const newResource = req.body; 
     db.add(newResource)
@@ -44,7 +45,7 @@ router.post('/', (req, res) => {
 }); 
 
 //* POST a resource to a project *// [🎠 working!]
-router.post('/addToProject', (req, res) => {
+router.post('/to-project', (req, res) => {
     const resourceData = req.body;
     db.addToProject(resourceData)
         .then(item => {

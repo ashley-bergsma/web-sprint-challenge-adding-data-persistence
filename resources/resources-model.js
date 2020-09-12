@@ -38,3 +38,5 @@ function addToProject(item){
         .insert(item)
         .then(([id]) => id);
 }; 
+
+//TODO It would be nice to have a 'favorite' column on the resources tables, boolean value that returns a user's favorite resources to quickly navigate to them
