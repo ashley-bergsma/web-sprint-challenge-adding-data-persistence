@@ -48,6 +48,7 @@ router.get('/:id/tasks', (req, res) => {
 });
 
 //TODO GET resources for project ID
+//! NEED - add task to Project (POST through project ID to grab the project_id value for the task)
 
 //* POST a new project *// [🎠 working!]
 router.post('/', (req, res) => {
@@ -60,6 +61,28 @@ router.post('/', (req, res) => {
             res.status(500).json({ message: "Error adding project" }); 
         });
 }); 
+
+//* POST a new task for a project *// 
+router.post('/:id/add-task', (req, res) => {
+    const newTask = req.body;
+    const { id } = req.params; 
+
+    db.findById(id)
+        .then(project => {
+            if (project) {
+                db.addTask(newTask, id)
+                    .then(task => {
+                        res.status(201).json(task); 
+                    })
+            } else {
+                res.status(404).json({ message: "Error referencing project id for this task" }); 
+            }
+        })
+        .catch(err => {
+            console.log(err); 
+            res.status(500).json({ message: "Failed to add new task" }); 
+        })
+})
 
 module.exports = router; 
 

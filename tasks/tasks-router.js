@@ -1,6 +1,7 @@
 const express = require('express'); 
 
 const db = require('./tasks-model'); 
+const tasksModel = require('./tasks-model');
 
 const router = express.Router(); 
 
@@ -31,19 +32,6 @@ router.get('/:id', (req, res) => {
         });
 }); 
 
-
-//* POST a new task *// [🎠 working!]
-router.post('/', (req, res) => {
-    const newProject = req.body; 
-    db.add(newProject)
-        .then(item => {
-            res.status(201).json(item);
-        })
-        .catch(err => {
-            res.status(500).json({ message: "Error adding project" }); 
-        });
-}); 
-
 //* DELETE a task *// [🎠 working!]
 router.delete('/:id', (req, res) => {
     const { id } = req.params; 
@@ -59,6 +47,8 @@ router.delete('/:id', (req, res) => {
             res.status(500).json({ message: "Error removing task" }); 
         });
 }); 
+
+//! Need: PUT to update a task 
 
 module.exports = router; 
 
